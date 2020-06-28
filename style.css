@@ -1,0 +1,7 @@
+article {
+    display: none;
+}
+
+.shown{
+    display: block !important;
+}

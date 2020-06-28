@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>The best darn quiz ever</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
     <header>
@@ -18,27 +19,27 @@
         <div class="row">
             <section class="col-md-6">
     <!-- separate div for start page that changes to display hidden (display: none) when you click start -->
-                <div class="startPage" id="startPage">   
+                <article class="shown" id="startPage">   
                     <h2>Star Wars Quiz</h2>
                     <p>Is the force with you? Find out how much you know about the turmoil that has plagued the galaxy since the birth of Anakin Skywalker</p>
-                    <button class="startButton" id="startButton"></button>
+                    <button class="startButton" id="startButton">Let's Go!</button>
                     <img src="" alt="" class="img-fluid">
-                </div>
+                </article>
 
     <!-- seperate div for question content -->
-                <div class="questionPage" id="questionPage">
+                <article class="questionPage" id="questionPage">
 <!-- each question is a heading with 4 buttons beneath it
      use js to replace text in heading and buttons eath time any answer is selected-->
                     <h2 class="questionSpace" id="questionSpace">Question text</h2>
-                    <ul>
-                        <li><button class="answerButton" id="answerButton">Answer</button></li>
-                        <li><button class="answerButton" id="answerButton">Answer</button></li>
-                        <li><button class="answerButton" id="answerButton">Answer</button></li>
-                        <li><button class="answerButton" id="answerButton">Answer</button></li>
+                    <ul id="ansList">
+                        <li><button class="answerButton" id="answerButton1">Answer</button></li>
+                        <li><button class="answerButton" id="answerButton2">Answer</button></li>
+                        <li><button class="answerButton" id="answerButton3">Answer</button></li>
+                        <li><button class="answerButton" id="answerButton4">Answer</button></li>
                     </ul>
-                </div>
-    <!-- separate dive for results page -->
-                <div class="resultsPage" id="resultsPage">
+                </article>
+    <!-- separate div for results page -->
+                <article class="resultsPage" id="resultsPage">
                     <h2>We Did It!</h2>
                     <p>Your final score is: <span id="finalScore"></span></p>
                     <form>
@@ -46,24 +47,25 @@
 
                         </label>
                         <input type="text" name="initials" id="initials">
-                        <button>Submit</button>
+                        <button id="scoreSubmit">Submit</button>
                     </form>
-                </div>
+                </article>
 
     <!-- hiscores page -->
-                <div class="hiScoresPage" id="hiScoresPage">
-                    <ul>
+                <article class="hiScoresPage" id="hiScoresPage">
+                    <ul id="scoresList">
                         
                     </ul>
                     <button class="backToStart" id="backToStart">Play Again</button>
                     <button class="clearScores" id="clearScores">Clear High Scores</button>
                     <img src="" alt="" class="img-fluid">
-                </div>
+                </article>
             </section>
         </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js" integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js" integrity="sha384-OgVRvuATP1z7JjHLkuOU7Xw704+h835Lr+6QL9UvYjZE3Ipu6Tp75j7Bh/kR0JKI" crossorigin="anonymous"></script>
+    <script src="script.js"></script>
 </body>
 </html>
