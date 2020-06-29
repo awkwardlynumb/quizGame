@@ -23,7 +23,7 @@
                     <h2>Star Wars Quiz</h2>
                     <p>Is the force with you? Find out how much you know about the turmoil that has plagued the galaxy since the birth of Anakin Skywalker</p>
                     <button class="startButton" id="startButton">Let's Go!</button>
-                    <img src="" alt="" class="img-fluid">
+                    <img src="images/start.gif" alt="" class="img-fluid">
                 </article>
 
     <!-- seperate div for question content -->
@@ -32,10 +32,6 @@
      use js to replace text in heading and buttons eath time any answer is selected-->
                     <h2 class="questionSpace" id="questionSpace">Question text</h2>
                     <ul id="ansList">
-                        <li><button class="answerButton" id="answerButton1">Answer</button></li>
-                        <li><button class="answerButton" id="answerButton2">Answer</button></li>
-                        <li><button class="answerButton" id="answerButton3">Answer</button></li>
-                        <li><button class="answerButton" id="answerButton4">Answer</button></li>
                     </ul>
                 </article>
     <!-- separate div for results page -->
@@ -43,11 +39,10 @@
                     <h2>We Did It!</h2>
                     <p>Your final score is: <span id="finalScore"></span></p>
                     <form>
-                        <label for="initials">
-
-                        </label>
+                        <label for="initials"></label>
                         <input type="text" name="initials" id="initials">
                         <button id="scoreSubmit">Submit</button>
+                        <img src="images/win.gif" class="img-fluid" alt="">
                     </form>
                 </article>
 
@@ -56,9 +51,16 @@
                     <ul id="scoresList">
                         
                     </ul>
-                    <button class="backToStart" id="backToStart">Play Again</button>
+                    <a href="#"><button class="backToStart" id="backToStart">Play Again</button></a>
                     <button class="clearScores" id="clearScores">Clear High Scores</button>
-                    <img src="" alt="" class="img-fluid">
+                    <img src="images/hiScore.gif" alt="" class="img-fluid">
+                </article>
+    <!-- time's up page -->
+                <article id="failPage">
+                    <h2>You lose!</h2>
+                    <img src="images/loss.gif" class="img-fluid" alt="R2 Falling">
+                    <p>Thanks for playing! The force wasn't with you... this time!</p>
+                    <a href="#"><button class="restart" id="restart">Play Again?</button></a>
                 </article>
             </section>
         </div>

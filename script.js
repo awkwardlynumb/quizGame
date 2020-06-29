@@ -4,28 +4,30 @@ const timer = document.querySelector("#timer");
 const startPage = document.querySelector("#startPage");
 const questions = document.querySelector("#questionPage");
 const results = document.querySelector("#resultsPage");
+const failPage = document.querySelector("#failPage")
 
 let secondsLeft = 60
 
+const sendMessage = function() {
+    timer.textContent = "Time's Up!";
+    questions.removeAttribute("class");
+    failPage.setAttribute("class", "shown");
+}
+
 function setTime() {
-    const timerInterval = setInterval(function() {
+    const timeLeft = setInterval(function() {
       secondsLeft--;
       timer.textContent = secondsLeft;
   
-      if(secondsLeft === 0) {
-        clearInterval(timerInterval);
+      if(secondsLeft <= 0) {
+        clearInterval(timeLeft);
         sendMessage();
       }
   
     }, 1000);
 }
 
-startQuiz.addEventListener("click", function(){
-    event.preventDefault();
-    setTime();
-    questions.setAttribute("class", "shown");
-    startPage.removeAttribute("class");
-})
+
 
 
 //function changing the question / answer text to the next question when each question is answered
@@ -37,124 +39,103 @@ startQuiz.addEventListener("click", function(){
     //for each question, we'll have an array of answers
 
 
-const questionText = ["question 1","question 2","question 3","question 4","question 5"];
+const questionText = ["Where on Tatooine was Anakin Skywalker born and raised?",
+    "The leader of the Geonosians was one of the main contributors in the early stages of the Death Star project, before being killed by Darth Vader on Mustafar. What was his name?",
+    "What is the name of the planet that was raided by the rebellion in order to capture the plans to the Death Star?",
+    "Each of the following characters had a strong claim to being the best pilot in the galaxy, which of them didn't actively claim to be?",
+    "Jar-Jar Binks was not executed for returning to meet with the Bosses of Gungan City on Naboo after being banished. What was the one thing that ensured his safety?"];
 const questAns = [
-    ["answer 1","answer 2","answer 3","answer 4"],
-    ["dog 1","dog 2","dog 3","dog 4"],
-    ["cat 1","cat 2","cat 3","cat 4"],
-    ["pig 1","pig 2","pig 3","pig 4"],
-    ["monkey 1","monkey 2","monkey 3","monkey 4"]
+    ["Mos Espa","Lars family moisture farm","Mos Eisley","Hutt City"],
+    ["Boss Nass","Hugo Stiglitz","Viceroy Gunray","Archduke Poggle the Lesser"],
+    ["Endor","Corouscant","Yavin","Scarif"],
+    ["Han Solo","Luke Skywalker","Anakin Skywalker","Poe Dameron"],
+    ["He wasn't worth their time","He was just passing through","A life-debt owed to Qui-Gon Jinn","He paid reparations"]
 ];
+
+const correctAns = [
+    ["correct","incorrect","incorrect","incorrect"],
+    ["incorrect","incorrect","incorrect","correct"],
+    ["incorrect","incorrect","incorrect","correct"],
+    ["incorrect","correct","incorrect","incorrect"],
+    ["incorrect","incorrect","correct","incorrect"]
+];
+
+
 
 let currentQuestion=0
 
 const question = document.querySelector("#questionSpace");
-const ans1 = document.querySelector("#answerButton1");
-const ans2 = document.querySelector("#answerButton2");
-const ans3 = document.querySelector("#answerButton3");
-const ans4 = document.querySelector("#answerButton4");
-const answer = document.querySelector(".answerButton");
+
 const ansList = document.querySelector("#ansList")
 
 //function keeping score
-//runs if correct answer is clicked; 
-    //if statements to add to a scoce variable as the test continues
+//subtracts time if incorrect answer is clicked
 
-let userScore = 0;
-
-//if the correct answer is clicked, respective of each question, add 20 to userScore
-// ans1.addEventListener("click", function(){
-//     event.preventDefault();
-//     if (currentQuestion === 0) {
-//     userScore + 20;
-//     }
-// })
-
-// ans4.addEventListener("click", function(){
-//     event.preventDefault();
-//     if (currentQuestion === 1) {
-//     userScore + 20;
-//     }
-// })
-
-// ans4.addEventListener("click", function(){
-//     event.preventDefault();
-//     if (currentQuestion === 2) {
-//     userScore + 20;
-//     }
-// })
-
-// ans2.addEventListener("click", function(){
-//     event.preventDefault();
-//     if (currentQuestion === 3) {
-//     userScore + 20;
-//     }
-// })
-
-// ans3.addEventListener("click", function(){
-//     event.preventDefault();
-//     if (currentQuestion === 4) {
-//     userScore + 20;
-//     }
-// })
-
-const scoreKeeper = function() {
-    if (currentQuestion === 0) {
-        ans1.addEventListener("click", function(){
-            userScore + 20
-        })
-    }
-    if (currentQuestion === 1) {
-        ans4.addEventListener("click", function(){
-            userScore + 20
-        })
-    }
-    if (currentQuestion === 2) {
-        ans4.addEventListener("click", function(){
-            userScore + 20
-        })
-    }
-    if (currentQuestion === 3) {
-        ans2.addEventListener("click", function(){
-            userScore + 20
-        })
-    }
-    if (currentQuestion === 4) {
-        ans3.addEventListener("click", function(){
-            userScore + 20
-        })
-    }
+const nextQ = function(){
+    currentQuestion ++;
+    
 }
 
-document.querySelectorAll('.answerButton').forEach(item =>{
-    item.addEventListener("click", function(){
-        scoreKeeper();
-        console.log(currentQuestion);
+
+startQuiz.addEventListener("click", function(){
+    event.preventDefault();
+    setTime();
+    questions.setAttribute("class", "shown");
+    startPage.removeAttribute("class");
+    question.textContent = questionText[currentQuestion];
+    for (let j = 0; j < questAns[currentQuestion].length; j++) {
+        let ansSpc = document.createElement("li");
+        let ansBtn = document.createElement("button");
+        ansBtn.textContent = questAns[currentQuestion][j];
+        ansBtn.setAttribute("value", correctAns[currentQuestion][j]);
+        ansBtn.setAttribute("type", "button");
+        ansSpc.appendChild(ansBtn);
+        ansList.appendChild(ansSpc);
+    }
+    ansList.addEventListener("click", function(event) {
         if(currentQuestion === 4) {
-            questions.removeAttribute("class");
-            results.setAttribute("class", "shown");
+            if (event.target.matches("button") && event.target.value === "incorrect"){
+                secondsLeft -= 4;
+                clearInterval(timeLeft);
+                questions.removeAttribute("class");
+                results.setAttribute("class", "shown");
+            } else {
+                clearInterval(timeLeft);
+                questions.removeAttribute("class");
+                results.setAttribute("class", "shown");
+            }
+        } else if (event.target.matches("button") && event.target.value === "incorrect"){
+            console.log("bacon");
+            secondsLeft -= 4;
+            currentQuestion ++;
         } else {
-            currentQuestion++;
-            question.textContent=questionText[currentQuestion];
-            ans1.textContent = questAns[currentQuestion][0];
-            ans2.textContent = questAns[currentQuestion][1];
-            ans3.textContent = questAns[currentQuestion][2];
-            ans4.textContent = questAns[currentQuestion][3];
-        }
-        console.log(userScore)
+            currentQuestion ++;
+        } 
     })
 })
 
+
+
 const scoreSpace = document.querySelector("#finalScore");
-scoreSpace.textContent = userScore;
+scoreSpace.textContent = secondsLeft;
 
 //when user submits initials, run a funtion that adds the score to the local storage
 const scoreSubmit = document.querySelector("#scoreSubmit")
+const initials = document.querySelector("#initials")
 scoreSubmit.addEventListener("click", function(){
-    localStorage.setItem("hiScore", userScore)
+    localStorage.setItem("hiScore", initials + secondsLeft);
+    results.removeAttribute("class");
+    hiScoresPage.setAttribute("class", "shown");
 })
 
 //get the data from local storage to show the scores in a list
-// localStorage.getItem("hiScore")
 
 // document.createElement("li")
+const hiScoresPage = document.querySelector("#hiScoresPage");
+const hiscoreLink = document.querySelector("#hiscoresButton");
+hiscoreLink.addEventListener("click", function(){
+    startPage.removeAttribute("class");
+    questions.removeAttribute("class");
+    results.removeAttribute("class");
+    hiScoresPage.setAttribute("class", "shown");
+})
