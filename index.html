@@ -10,9 +10,9 @@
 <body>
     <header>
         <!-- header with view hiscores button and timer -->
-        <button id="hiscoresButton"><p>View Hiscores</p></button>
+        <button class="mr-auto" id="hiscoresButton"><p>View Hiscores</p></button>
         <div id="time">
-            <p>Time left: <span id="timer"></span></p>
+            <p class="ml-auto">Time left: <span id="timer"></span></p>
         </div>
     </header>
     <div class="container">
@@ -48,10 +48,9 @@
 
     <!-- hiscores page -->
                 <article class="hiScoresPage" id="hiScoresPage">
-                    <ul id="scoresList">
-                        
-                    </ul>
-                    <a href="#"><button class="backToStart" id="backToStart">Play Again</button></a>
+                    <h2>High Scores</h2>
+                    <ul id="scoresList"></ul>
+                    <button class="backToStart" id="backToStart">Play Again</button>
                     <button class="clearScores" id="clearScores">Clear High Scores</button>
                     <img src="images/hiScore.gif" alt="" class="img-fluid">
                 </article>
@@ -60,7 +59,7 @@
                     <h2>You lose!</h2>
                     <img src="images/loss.gif" class="img-fluid" alt="R2 Falling">
                     <p>Thanks for playing! The force wasn't with you... this time!</p>
-                    <a href="#"><button class="restart" id="restart">Play Again?</button></a>
+                    <button class="restart" id="restart">Play Again?</button>
                 </article>
             </section>
         </div>
